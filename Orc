@@ -1,0 +1,16 @@
+import random
+from Enemy import Enemy
+
+
+class Orc(Enemy):
+    def __init__(self, name):
+        super().__init__(name)
+        self.health = 500
+        self.attack_power = 30
+        self.luck = 20
+
+    def attack(self):
+        baseDamage = random.randint(1, self.attack_power)
+        critical = random.randint(0, 100) < self.luck
+        if critical:
+            baseDamage *= 2
