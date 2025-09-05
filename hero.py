@@ -17,7 +17,8 @@ class Hero:
 
     def __init__(self, name):
         self.name = name
-        self.health = 1000
+        self.maxHealth = 1000
+        self.remainingHealth = self.maxHealth
         self.strength = random.randint(1, 100)
         self.healingPower = 30
 
@@ -25,12 +26,14 @@ class Hero:
         return random.randint(1, self.strength)
 
     def receive_damage(self, damage):
-        self.health -= damage
-        if self.health < 0:
-            self.health = 0
+        self.remainingHealth -= damage
+        if self.remainingHealth < 0:
+            self.remainingHealth = 0
 
     def special_ability(self):
-        self.health += self.healingPower
+        self.remainingHealth += self.healingPower
+        if self.remainingHealth > self.maxHealth:
+            self.remainingHealth = self.maxHealth
 
     def is_alive(self):
         return self.health > 0
