@@ -27,7 +27,9 @@ def main():
     hero = Hero("Hornet")
 
     # Create goblins ༼ ºل͟º ༽ ༼ ºل͟º ༽ ༼ ºل͟º ༽
-    goblins = [Goblin(f"Goblin {i+1}", "green") for i in range(3)]
+    goblins = [Goblin(f"Goblin {i+1}", "green") for i in range(
+        random.randint(3, 5)
+        )]
 
     # Keep track of how many goblins were defeated
     defeated_goblins = 0
@@ -79,9 +81,7 @@ def main():
         print("\nThe hero has been defeated. Game Over. (｡•́︿•̀｡)")
         print(f"\nRounds: {rounds}")
         print(f"\nTotal Damage: {total_damage}")
-
-    # Final tally of goblins defeated
-    print(f"\nTotal goblins defeated: {defeated_goblins} / {len(goblins)}")
+        print(f"\nGoblins Defeated: {defeated_goblins}\n")
 
 
 if __name__ == "__main__":

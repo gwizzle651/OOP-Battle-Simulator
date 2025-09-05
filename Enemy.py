@@ -14,8 +14,10 @@ class Enemy:
 
     def take_damage(self, damage):
         self.remainingHealth -= damage
-        print(f"{self.name} takes {damage} damage."
-              "Health is now {self.health}.")
+        if self.remainingHealth < 0:
+            self.remainingHealth = 0
+        print(f"{self.name} takes {damage} damage.\n"
+              f"Health is now {self.remainingHealth}.")
 
     def is_alive(self):
         return self.remainingHealth > 0
