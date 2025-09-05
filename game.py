@@ -1,10 +1,22 @@
 import random
+from Orc import Orc
 from Goblin import Goblin
 from hero import Hero
 
 
-def startBossFight():
-    pass
+def startBossFight(hero):
+    boss = Orc("Grommash the Destroyer")
+    while boss.is_alive() and hero.is_alive():
+        damage = hero.strike()
+        print(f"Hero attacks {boss.name} for {damage} damage!")
+        boss.take_damage(damage)
+
+        if boss.is_alive():
+            damage = boss.attack()
+            print(f"{boss.name} attacks hero for {damage} damage!")
+            hero.receive_damage(damage)
+        else:
+            print(f"{boss.name} has been defeated! ༼ ᕤ◕◡◕ ༽ᕤ")
 
 
 def main():
@@ -53,6 +65,16 @@ def main():
         print("\nThe hero has defeated all the goblins! ༼ ᕤ◕◡◕ ༽ᕤ")
         print(f"\nRounds: {rounds}")
         print(f"\nTotal Damage: {total_damage}")
+        startBossFight(hero)
+        if hero.is_alive():
+            print("\nThe hero has triumphed over the boss and beat the game!"
+                  "༼ ᕤ◕◡◕ ༽ᕤ")
+            print(f"\nRounds: {rounds}")
+            print(f"\nTotal Damage: {total_damage}")
+        else:
+            print("\nThe hero was defeated by the boss. Game Over. (｡•́︿•̀｡)")
+            print(f"\nRounds: {rounds}")
+            print(f"\nTotal Damage: {total_damage}")
     else:
         print("\nThe hero has been defeated. Game Over. (｡•́︿•̀｡)")
         print(f"\nRounds: {rounds}")
