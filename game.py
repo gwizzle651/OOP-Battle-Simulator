@@ -10,10 +10,14 @@ def startBossFight(hero):
         damage = hero.strike()
         print(f"Hero attacks {boss.name} for {damage} damage!")
         boss.take_damage(damage)
+        if random.randint(1, 10) == 1:
+            hero.heal()
+            print("Hero uses healing power!")
 
         if boss.is_alive():
-            damage = boss.attack()
+            damage, strengthReduction = boss.attack()
             print(f"{boss.name} attacks hero for {damage} damage!")
+            hero.strength = max(1, hero.strength - strengthReduction)
             hero.receive_damage(damage)
         else:
             print(f"{boss.name} has been defeated! ༼ ᕤ◕◡◕ ༽ᕤ")
@@ -27,7 +31,7 @@ def main():
     hero = Hero("Hornet")
 
     # Create goblins ༼ ºل͟º ༽ ༼ ºل͟º ༽ ༼ ºل͟º ༽
-    goblins = [Goblin(f"Goblin {i+1}", "green") for i in range(
+    goblins = [Goblin(f"Goblin {i+1}") for i in range(
         random.randint(3, 5)
         )]
 
