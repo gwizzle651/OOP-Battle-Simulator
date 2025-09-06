@@ -7,7 +7,7 @@ class Hero:
         self.maxHealth = 1200
         self.remainingHealth = self.maxHealth
         self.strength = random.randint(10, 30)
-        self.healingPower = 250
+        self.healingPower = 30
 
     def strike(self):
         return random.randint(1, self.strength)

@@ -6,15 +6,29 @@ class Orc(Enemy):
     def __init__(self, name):
         super().__init__(name, luck=15)
         self.maxHealth = 500
-        self.strength = 25
+        self.strength = 20
 
     def attack(self):
-        baseDamage = random.randint(1, self.strength)
+        whichAttack = random.choice(["smash", "slash", "stomp"])
+        print(f"{self.name} uses {whichAttack}!")
+        if whichAttack == "smash":
+            damage = random.randint(10, self.strength + 10)
+            self.remainingHealth -= 15
+            print(f"\n{self.name} hurts itself while smashing!\n"
+                  f"Health is now {self.remainingHealth}.")
+        elif whichAttack == "slash":
+            damage = random.randint(5, self.strength)
+        elif whichAttack == "stomp":
+            damage = random.randint(1, self.strength - 5)
+            strengthReduction = random.randint(1, 3)
+            print(f"\n{self.name} stomps your hero to the ground,"
+                  " reducing your hero's strength!")
+        damage = random.randint(1, self.strength)
         critical = random.randint(0, 100) < self.luck
         if critical:
-            baseDamage *= 2
+            damage *= 2
             print(f"Critical hit by {self.name}!")
-        return baseDamage
+        return damage, strengthReduction if whichAttack == "stomp" else 0
 
     def take_damage(self, damage):
         self.remainingHealth -= damage
